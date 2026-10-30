@@ -1,14 +1,3 @@
-/* =========================================================
-   LISTA DE IMÓVEIS DO ALPHAVILLE
-   Para adicionar um imóvel, copie um bloco { ... } e mude os valores.
-   tipo:    "casa" ou "terreno"
-   codigo:  código do imóvel (aparece na foto)
-   foto:    nome do arquivo dentro de img/imoveis/ (ex.: "CA4721.jpg")
-            OU o endereço completo da imagem (ex.: "https://site.com/foto.jpg")
-            Sem foto, aparece um fundo cinza.
-   link:    página do imóvel no site de vocês (deixe "" para esconder o botão)
-   O primeiro imóvel veio do seu print; os outros são exemplos: troque pelos reais.
-   ========================================================= */
 const imoveis = [
   {
     codigo: "CA4721", tipo: "casa", operacao: "Venda",
