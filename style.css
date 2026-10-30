@@ -210,3 +210,69 @@ h2 { font-family: var(--serifa); font-weight: 400; font-size: clamp(2rem, 4.5vw,
 .opcao:hover, .opcao:has(input:checked) { border-color: var(--preto); }
 .formulario .opcao input { width: 18px; height: 18px; padding: 0; margin: 0; flex: none; accent-color: #0a0a0a; }
 @media (max-width: 899px) { .contato__texto { position: static; } }
+
+/* =========================================================
+   DETALHES DOURADOS - Para mudar o tom de dourado, altere só estas 3 cores
+   ========================================================= */
+:root {
+  --dourado: #b8975a;         /* dourado principal (linhas, bordas) */
+  --dourado-escuro: #8a6d2f;  /* para textos sobre fundo claro */
+  --dourado-claro: #d9b977;   /* para textos sobre fundo escuro */
+}
+
+::selection { background: var(--dourado); color: #0a0a0a; }
+
+/* Cabeçalho e rodapé */
+.topo { border-bottom-color: var(--dourado); }
+.nav a:hover, .nav a.atual { color: var(--dourado-escuro); }
+.rodape { border-top: 3px solid var(--dourado); }
+.rodape .rotulo { color: var(--dourado-claro); }
+
+/* Topo da página */
+.hero .rotulo { color: var(--dourado-claro); }
+.hero h1 em { color: var(--dourado-claro); }
+.dados { border-top: 2px solid var(--dourado); }
+.dados strong { color: var(--dourado-claro); }
+
+/* Títulos com uma pequena linha dourada embaixo */
+h2::after, .titulo-pagina::after {
+  content: "";
+  display: block;
+  width: 56px;
+  height: 2px;
+  background: var(--dourado);
+  margin-top: 18px;
+}
+
+/* Textos pequenos e detalhes */
+.secao p.rotulo { color: var(--dourado-escuro); }
+.comodidades li::before { color: var(--dourado-escuro); }
+.voltar:hover { color: var(--dourado-escuro); }
+
+/* Faixa escura "Veja todos os imóveis" */
+.secao--escura { border-top: 2px solid var(--dourado); }
+.secao--escura p.rotulo { color: var(--dourado-claro); }
+
+/* Botões: ficam dourados ao passar o mouse */
+.btn:hover, .btn--vazado:hover, .btn--claro:hover, .btn--contorno:hover, .btn--pequeno:hover {
+  background: var(--dourado);
+  border-color: var(--dourado);
+  color: #0a0a0a;
+}
+.zoom__fechar:hover { background: var(--dourado); border-color: var(--dourado); color: #0a0a0a; }
+
+/* Lista de imóveis */
+.chip.ativo { border-color: var(--dourado); box-shadow: inset 0 -3px 0 var(--dourado); }
+.chip:hover { border-color: var(--dourado); }
+.linha:hover { border-color: var(--dourado); }
+.linha__preco strong { color: var(--dourado-escuro); }
+.codigo { border-left: 3px solid var(--dourado); }
+
+/* Formulário */
+.formulario .passo:not(:first-child) { border-top-color: var(--dourado); }
+.opcao:hover, .opcao:has(input:checked) { border-color: var(--dourado); }
+.formulario .opcao input { accent-color: var(--dourado); }
+.formulario input:focus, .formulario select:focus, .formulario textarea:focus { border-color: var(--dourado); }
+
+/* ===== TOUR 3D ===== */
+.zoom iframe { width: 100%; max-width: 1280px; height: 100%; border: 0; background: #000; cursor: default; }
