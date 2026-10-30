@@ -56,5 +56,5 @@ nav.addEventListener("click", function (evento) {
   }
 });
 
-/* 3. Ano atual no rodapé */
+
 document.getElementById("ano").textContent = new Date().getFullYear();
