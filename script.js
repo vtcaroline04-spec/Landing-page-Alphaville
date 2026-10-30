@@ -1,8 +1,3 @@
-/* =========================================================
-   CONFIGURAÇÃO: troque pelo seu número de WhatsApp (usado no formulário)
-   Formato: 55 + DDD + número, sem espaços ou traços
-   Os botões do index.html têm o número escrito direto no link
-   ========================================================= */
 const WHATSAPP = "5521970929173";
 
 function linkWhatsapp(mensagem) {
