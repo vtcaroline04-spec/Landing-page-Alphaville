@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Imóveis no Alphaville | Vianna Alves Imóveis</title>
+  <meta name="description" content="Veja todos os imóveis disponíveis no Alphaville: casas e lotes com atendimento da Vianna Alves Imóveis.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Karla:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ===== CABEÇALHO ===== -->
+  <header class="topo">
+    <div class="container topo__conteudo">
+      <a href="index.html" class="logo"><img src="logo.png" alt="Vianna Alves Imóveis · Maricá"></a>
+      <nav class="nav" id="nav">
+        <a href="index.html">Início</a>
+        <a href="index.html#sobre">O condomínio</a>
+        <a href="imoveis.html" class="atual">Imóveis</a>
+        <a href="#contato">Contato</a>
+      </nav>
+      <a class="btn btn--pequeno" target="_blank" rel="noopener" href="https://wa.me/5521970929173?text=Ol%C3%A1%21%20Tenho%20interesse%20no%20Alphaville%201.%20Pode%20me%20passar%20mais%20informa%C3%A7%C3%B5es%3F">Fale conosco</a>
+      <button class="menu-botao" id="menu-botao" aria-expanded="false" aria-controls="nav">Menu</button>
+    </div>
+  </header>
+
+  <main>
+    <!-- ===== TÍTULO ===== -->
+    <section class="secao secao--titulo">
+      <div class="container">
+        <a class="voltar rotulo" href="index.html">← Voltar para o Alphaville 1</a>
+        <h1 class="titulo-pagina">Todos os imóveis do Alphaville.</h1>
+        <p class="texto">Escolha o que combina com você e chame a gente no WhatsApp.</p>
+      </div>
+    </section>
+
+    <!-- ===== FILTRO ===== -->
+    <section class="filtros">
+      <div class="container">
+        <p class="rotulo">Tipo</p>
+        <div class="grupo" id="filtro-tipo">
+          <button class="chip ativo" data-valor="">Todos</button>
+          <button class="chip" data-valor="casa">Casas</button>
+          <button class="chip" data-valor="terreno">Terrenos</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== LISTA ===== -->
+    <section class="secao">
+      <div class="container">
+        <p id="contagem" class="texto"></p>
+        <div id="lista" class="linhas"></div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===== RODAPÉ ===== -->
+  <footer class="rodape" id="contato">
+    <div class="rodape__grade">
+      <div>
+        <a href="index.html" class="logo"><img src="logo-branca.png" alt="Vianna Alves Imóveis"></a>
+        <p>Atendimento próximo, do primeiro contato às chaves.</p>
+      </div>
+      <div>
+        <p class="rotulo">Contato</p>
+        <ul>
+          <li>(21) 97092-9173</li>
+          <li>contato@viannaalves.com.br</li>
+          <li>Maricá/RJ</li>
+        </ul>
+      </div>
+    </div>
+    <div class="rodape__fim">
+      <span>© <span id="ano"></span> Vianna Alves Imóveis. Todos os direitos reservados.</span>
+      <span>Maricá · Rio de Janeiro</span>
+    </div>
+  </footer>
+
+  <!-- script.js primeiro (menu e WhatsApp), depois imoveis.js (lista) -->
+  <script src="script.js"></script>
+  <script src="imoveis.js"></script>
+</body>
+</html>
