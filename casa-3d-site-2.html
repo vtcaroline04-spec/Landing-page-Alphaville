@@ -1,13 +1,13 @@
 <style>
 #casaB{position:relative;width:100%;height:100%;min-height:calc(100vh - 30px);border-radius:12px;overflow:hidden;background:linear-gradient(#4a6bb0,#b99ab0 55%,#f0b88a);font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
-#casaB canvas{display:block;width:100%;height:100%;touch-action:pan-y;cursor:grab}
+#casaB canvas{display:block;width:100%;height:100%;touch-action:none;cursor:grab}
 #casaB .c3d-ui{position:absolute;left:0;right:0;bottom:12px;display:flex;flex-direction:column;align-items:center;gap:6px;pointer-events:none;color:#fff}
 #casaB .c3d-ui button{pointer-events:auto;border:0;border-radius:999px;padding:9px 18px;font-size:14px;background:rgba(255,255,255,.22);color:#fff;cursor:pointer}
 #casaB .c3d-ui span{font-size:12px;opacity:.85}
 </style>
 <div id="casaB">
   <canvas id="casaB-canvas"></canvas>
-  <div class="c3d-ui"><button id="casaB-btn" type="button">Pausar rotação</button><span>Arraste para girar · Ctrl + rolar para zoom</span></div>
+  <div class="c3d-ui"><button id="casaB-btn" type="button">Pausar rotação</button><span>Arraste para girar · pinça ou scroll para zoom</span></div>
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script>
@@ -116,11 +116,15 @@ const sun=new THREE.DirectionalLight(0xffcfa0,1.1);sun.position.set(18,24,20);su
 Object.assign(sun.shadow.camera,{left:-28,right:28,top:28,bottom:-28,near:1,far:90});sun.shadow.bias=-.0005;S.add(sun);
 [[3,2.6,2.5,0xffd9a0,1.2],[-2.25,.8,6.5,0xffa24a,.8],[-5,3.5,3,0xffc27a,1],[-.5,.8,-13,0x7fd4ff,.8]].forEach(p=>{const l=new THREE.PointLight(p[3],p[4],10,2);l.position.set(p[0],p[1],p[2]);H.add(l)});
 // controle
-let rot=.5,pitch=.3,auto=true,drag=false,lx=0,ly=0;
-cv.addEventListener('pointerdown',e=>{drag=true;lx=e.clientX;ly=e.clientY;cv.setPointerCapture(e.pointerId);cv.style.cursor='grabbing'});
-cv.addEventListener('pointerup',()=>{drag=false;cv.style.cursor='grab'});
-cv.addEventListener('pointermove',e=>{if(!drag)return;rot+=(e.clientX-lx)*.01;if(e.pointerType!=='touch')pitch=Math.max(.04,Math.min(1.1,pitch+(e.clientY-ly)*.005));lx=e.clientX;ly=e.clientY});
-cv.addEventListener('wheel',e=>{if(!(e.ctrlKey||e.metaKey))return;e.preventDefault();dist=Math.max(16,Math.min(60,dist+e.deltaY*.03))},{passive:false});
+let rot=.5,pitch=.3,auto=true,drag=false,lx=0,ly=0,pd=0;
+const ptr=new Map(),clampD=v=>Math.max(14,Math.min(70,v));
+cv.addEventListener('pointerdown',e=>{ptr.set(e.pointerId,[e.clientX,e.clientY]);cv.setPointerCapture(e.pointerId);drag=true;lx=e.clientX;ly=e.clientY;if(ptr.size==2){const[a,b]=[...ptr.values()];pd=Math.hypot(a[0]-b[0],a[1]-b[1])}cv.style.cursor='grabbing'});
+const up=e=>{ptr.delete(e.pointerId);if(ptr.size==1){const p=[...ptr.values()][0];lx=p[0];ly=p[1]}if(!ptr.size){drag=false;cv.style.cursor='grab'}};
+cv.addEventListener('pointerup',up);cv.addEventListener('pointercancel',up);
+cv.addEventListener('pointermove',e=>{if(!ptr.has(e.pointerId))return;ptr.set(e.pointerId,[e.clientX,e.clientY]);
+ if(ptr.size==2){const[a,b]=[...ptr.values()];const d=Math.hypot(a[0]-b[0],a[1]-b[1]);if(pd&&d)dist=clampD(dist*pd/d);pd=d;return}
+ rot+=(e.clientX-lx)*.01;pitch=Math.max(.04,Math.min(1.1,pitch+(e.clientY-ly)*.005));lx=e.clientX;ly=e.clientY});
+cv.addEventListener('wheel',e=>{e.preventDefault();dist=clampD(dist+e.deltaY*.03)},{passive:false});
 const btn=document.getElementById('casaB-btn');btn.onclick=()=>{auto=!auto;btn.textContent=auto?'Pausar rotação':'Retomar rotação'};
 function resize(){const w=wrap.clientWidth,h=wrap.clientHeight;R.setSize(w,h,false);cam.aspect=w/h;cam.updateProjectionMatrix()}
 new ResizeObserver(resize).observe(wrap);resize();
@@ -130,4 +134,4 @@ new ResizeObserver(resize).observe(wrap);resize();
  cam.position.set(0,Math.sin(pitch)*dist+3.5,Math.cos(pitch)*dist);cam.lookAt(0,3,0);R.render(S,cam)})(0);
 })();
 </script>
-<!-- ===== FIM ===== -->
+<!-- ===== FIM ===== --> -->
