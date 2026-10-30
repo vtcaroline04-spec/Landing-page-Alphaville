@@ -1,20 +1,5 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Casa em 3D | Vianna Alves Imóveis</title>
-  <style>
-    html, body { margin: 0; height: 100%; background: #0a0a0a; overflow: hidden; }
-    /* Faz o modelo ocupar a janela inteira */
-    body #casa3d { height: 100vh; max-height: none; border-radius: 0; }
-    .aviso3d { position: fixed; top: 14px; left: 14px; z-index: 5; pointer-events: none; background: rgba(10,10,10,.72); color: #d9b977; font: 700 11px/1 system-ui, sans-serif; letter-spacing: .18em; text-transform: uppercase; padding: 9px 12px; }
-  </style>
-</head>
-<body>
-<!-- ===== CASA 3D 360° — cole este bloco inteiro no ponto da página onde quer o modelo ===== -->
 <style>
-#casa3d{position:relative;width:100%;height:520px;max-height:80vh;border-radius:12px;overflow:hidden;background:linear-gradient(#39466e,#7d6a82 58%,#d99a66);font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
+#casa3d{position:relative;width:100%;height:100%;min-height:calc(100vh - 30px);border-radius:12px;overflow:hidden;background:linear-gradient(#39466e,#7d6a82 58%,#d99a66);font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
 #casa3d canvas{display:block;width:100%;height:100%;touch-action:pan-y;cursor:grab}
 #casa3d .c3d-ui{position:absolute;left:0;right:0;bottom:12px;display:flex;flex-direction:column;align-items:center;gap:6px;pointer-events:none;color:#fff}
 #casa3d .c3d-ui button{pointer-events:auto;border:0;border-radius:999px;padding:9px 18px;font-size:14px;background:rgba(255,255,255,.22);color:#fff;cursor:pointer}
@@ -35,7 +20,7 @@ R.outputEncoding=THREE.sRGBEncoding;R.toneMapping=THREE.ACESFilmicToneMapping;R.
 R.shadowMap.enabled=true;R.shadowMap.type=THREE.PCFSoftShadowMap;
 const S=new THREE.Scene();
 const cam=new THREE.PerspectiveCamera(42,1,.1,400);
-let dist=36;
+let dist=34;
 // ambiente (reflexos de entardecer)
 (function(){const c=document.createElement('canvas');c.width=256;c.height=128;const x=c.getContext('2d');
  const g=x.createLinearGradient(0,0,0,128);g.addColorStop(0,'#4a5a8c');g.addColorStop(.5,'#b58a96');g.addColorStop(.6,'#e0a070');g.addColorStop(.62,'#2a3320');g.addColorStop(1,'#1a2014');
@@ -118,7 +103,7 @@ function brom(x,z,c){for(let i=0;i<8;i++){const l=new THREE.Mesh(new THREE.ConeG
 B(2.6,.5,.7,3.4,.25,5.6,PM(0x45454a,.8));
 for(let i=-4;i<=4;i++){const g=new THREE.Mesh(new THREE.ConeGeometry(.09,.8,4),PM(0x6ca83e,.8));g.position.set(-2.6,.4,7+i*1.1);G.add(g)}
 // montanhas ao fundo
-[[-70,-90,38,0x2a3a35],[10,-110,55,0x263631],[75,-70,40,0x2d3d38],[-100,10,36,0x2a3a35],[100,30,44,0x293935]].forEach(m=>{const h=new THREE.Mesh(new THREE.ConeGeometry(m[2]*1.1,m[2]*1.5,7),new THREE.MeshStandardMaterial({color:m[3],roughness:1,flatShading:true}));h.position.set(m[0],m[2]*.65-2,m[1]);G.add(h)});
+[[-70,-90,38,0x2a3a35],[10,-110,55,0x263631],[75,-70,40,0x2d3d38],[-100,10,36,0x2a3a35],[100,30,44,0x293935]].forEach(m=>{const h=new THREE.Mesh(new THREE.ConeGeometry(m[2]*1.1,m[2]*1.5,7),new THREE.MeshBasicMaterial({color:0x3c5262}));h.position.set(m[0]*1.7,m[2]*.65-2,m[1]*1.7);G.add(h)});
 // brilho dos LEDs
 const gt=tex((x,w,h)=>{const g=x.createRadialGradient(64,64,0,64,64,64);g.addColorStop(0,'rgba(255,200,120,.9)');g.addColorStop(1,'rgba(255,160,60,0)');x.fillStyle=g;x.fillRect(0,0,128,128)},128,128);
 function glow(x,y,z,s){const sp=new THREE.Sprite(new THREE.SpriteMaterial({map:gt,blending:THREE.AdditiveBlending,depthWrite:false,transparent:true,opacity:.7}));sp.scale.set(s,s,1);sp.position.set(x,y,z);G.add(sp)}
@@ -147,6 +132,3 @@ new ResizeObserver(resize).observe(wrap);resize();
 </script>
 <!-- ===== FIM ===== -->
 
-<span class="aviso3d">Representação ilustrativa</span>
-</body>
-</html>
