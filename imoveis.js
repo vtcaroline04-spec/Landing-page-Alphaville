@@ -7,7 +7,7 @@ const imoveis = [
     bairro: "Inoã", cidade: "Maricá - RJ",
     detalhe: "3 quartos(2 suítes), 370m²", preco:  1590000,
     foto: "ca4721.jpg", link: "https://viannaalvesimoveis.com.br/imovel/CA4721",
-    tour: ""
+    tour: "casa-3d-site.html"
   },
   {
     codigo: "CA7068", tipo: "casa", operacao: "Venda",
@@ -16,7 +16,7 @@ const imoveis = [
     bairro: "Inoã", cidade: "Maricá - RJ",
     detalhe: "4 quartos(4 suítes), 396m²", preco: 1450000,
     foto: "ca7068.jpg", link: "https://viannaalvesimoveis.com.br/imovel/CA7068",
-    tour: "casa-3d.html"
+    tour: "casa-3d-site-2.html"
   },
   {
     codigo: "CA3102", tipo: "casa", operacao: "Venda",
@@ -105,9 +105,7 @@ document.getElementById("filtro-tipo").addEventListener("click", function (event
 atualizarLista();
 
 
-/* =========================================================
-   FOTO AMPLIADA: clicar na foto abre ela inteira
-   ========================================================= */
+/* ========= FOTO AMPLIADA: clicar na foto abre ela inteira ========== */
 let fotoOrigem = null;
 
 function fecharFoto() {
@@ -155,7 +153,20 @@ function abrirTour(botaoTour) {
   zoom.setAttribute("aria-label", "Tour 3D do imóvel");
 
   const quadro = document.createElement("iframe");
-  quadro.src = botaoTour.dataset.tour;
+  const endereco = botaoTour.dataset.tour;
+  if (endereco.indexOf("https://") === 0) {
+    quadro.src = endereco; // tour de outro serviço (Matterport etc.)
+  } else {
+    // Arquivo do próprio site: lê o conteúdo e coloca dentro da janela.
+    // Assim a hospedagem não consegue bloquear a exibição.
+    fetch(endereco)
+      .then(function (resposta) {
+        if (!resposta.ok) throw new Error("arquivo não encontrado");
+        return resposta.text();
+      })
+      .then(function (html) { quadro.srcdoc = html; })
+      .catch(function () { quadro.src = endereco; });
+  }
   quadro.title = "Tour 3D do imóvel";
   quadro.allowFullscreen = true;
   quadro.setAttribute("allow", "fullscreen; xr-spatial-tracking; gyroscope; accelerometer");
