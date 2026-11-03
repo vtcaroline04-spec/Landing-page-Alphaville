@@ -212,7 +212,8 @@ h2 { font-family: var(--serifa); font-weight: 400; font-size: clamp(2rem, 4.5vw,
 @media (max-width: 899px) { .contato__texto { position: static; } }
 
 /* =========================================================
-   DETALHES DOURADOS - Para mudar o tom de dourado, altere só estas 3 cores
+   DETALHES DOURADOS
+   Para mudar o tom de dourado, altere só estas 3 cores
    ========================================================= */
 :root {
   --dourado: #b8975a;         /* dourado principal (linhas, bordas) */
@@ -274,5 +275,7 @@ h2::after, .titulo-pagina::after {
 .formulario .opcao input { accent-color: var(--dourado); }
 .formulario input:focus, .formulario select:focus, .formulario textarea:focus { border-color: var(--dourado); }
 
-/* ===== TOUR 3D ===== */
-.zoom iframe { width: 100%; max-width: 1280px; height: 100%; border: 0; background: #000; cursor: default; }
+
+/* ===== VÍDEO DO YOUTUBE ===== */
+.video { position: relative; width: 100%; aspect-ratio: 16 / 9; background: #000; border: 1px solid var(--dourado); }
+.video iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
