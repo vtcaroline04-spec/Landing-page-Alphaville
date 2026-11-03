@@ -23,7 +23,7 @@ if (formulario) {
     const pegar = function (campo) { return String(dados.get(campo) || "").trim(); };
 
     const linhas = [
-      "Olá! Vim pelo site do Alphaville 1 e gostaria de ajuda para encontrar um imóvel.",
+      "Olá! Vim pelo site do Alphaville e gostaria de ajuda para encontrar um imóvel.",
       "",
       "Nome: " + pegar("nome"),
       "Telefone: " + pegar("telefone")
